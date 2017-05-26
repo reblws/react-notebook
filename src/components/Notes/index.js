@@ -21,7 +21,8 @@ class Notes extends React.Component {
   }
 
   notesFound() {
-    return this.props.notesArray.filter(note => (
+    if (this.state.SearchQuery === '') return this.props.notes;
+    return this.props.notes.filter(note => (
       note.text.includes(this.searchQuery) || note.title.includes(this.searchQuery)
     ));
   }
@@ -30,11 +31,11 @@ class Notes extends React.Component {
     return (
       <div className="notes-container">
         <NoteList
-          notes={this.props.notesArray}
+          notes={this.notesFound()}
           updateSearchQuery={this.updateSearchQuery}
           currentTag={'all'}
         />
-        <NoteEntry note={this.props.notesArray[0]} />
+        <NoteEntry note={this.props.notes[0]} />
       </div>
     );
   }
