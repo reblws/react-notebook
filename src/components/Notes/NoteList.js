@@ -8,18 +8,17 @@ import NotePreview from './NotePreview';
 //    this.props.updateSearchQuery [array]
 //    this.props.currentTag [string]
 const NoteList = props => {
-  const notes = props.notes
-    .map(note => <NotePreview note={note} />);
+  const previewList = props.notes
+    .map(note => <NotePreview key={note.id} note={note} />);
 
-  console.log(notes);
   return (
     <div className="note-list">
       <strong>{props.currentTag} notes</strong>
       <SearchBar updateSearchQuery={props.updateSearchQuery} />
       <div className="separator" />
-      {notes}
+      {previewList}
     </div>
   );
-}
+};
 
 export default NoteList;

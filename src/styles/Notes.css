@@ -6,26 +6,50 @@
   font-size: 12px;
 }
 
-/* is plural, for <NoteList /> */
+
+/* is plural, for <Notes /> */
+
 .notes-container {
-  display:flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
-  max-width: 300px;
 }
 
+
+/* <NoteList /> */
+
+.note-list {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100px;
+  flex: 0 0 100px;
+  border-right: 1px solid rgb(236, 236, 236);
+}
+
+
 /* <NotePreview> */
+
 .note-preview {
   padding: 10px;
   border-bottom: 1px solid rgb(236, 236, 236);
 }
 
-.note-date-preview, .note-text-preview {
+.note-date-preview,
+.note-text-preview {
   font-size: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: inherit;
 }
 
 .note-title-preview {
   font-weight: bold;
-  font-size: 17px;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .searchbar {
@@ -35,42 +59,56 @@
 
 
 /* The div containing NoteHeader and NoteEditor */
+
 .note-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
+  -ms-flex-preferred-size: fill;
+  flex-basis: fill;
 }
 
+
 /* NoteHeader div container */
+
 .note-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   margin: 10px;
 }
 
 .editor-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   /*height: 100%;*/
 }
 
 .editor-container textarea {
   margin: 10px;
+  width: 100%;
+  box-sizing: border-box;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   /*resize: none;*/
 }
 
 
-
 /* This is a placeholder */
+
 .separator {
   height: 15px;
   width: 100%;

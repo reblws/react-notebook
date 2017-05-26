@@ -1,7 +1,9 @@
 import React from 'react';
 
 const SearchBar = props => (
-  <input className="searchbar" type="text" />
+  <div className="searchbar-container">
+    <input className="searchbar" type="text" />
+  </div>
 );
 
 export default SearchBar;
