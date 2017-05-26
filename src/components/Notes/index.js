@@ -21,7 +21,9 @@ class Notes extends React.Component {
   }
 
   notesFound() {
-    if (this.state.SearchQuery === '') return this.props.notes;
+    if (this.state.searchQuery.length === 0) {
+      return this.props.notes;
+    }
     return this.props.notes.filter(note => (
       note.text.includes(this.searchQuery) || note.title.includes(this.searchQuery)
     ));

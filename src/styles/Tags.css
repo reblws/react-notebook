@@ -1,0 +1,35 @@
+.tags-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(246, 246, 246);
+  border-right: 1px solid rgb(246, 246, 246);
+  max-width: 150px;
+}
+
+/* <Tag> */
+.tag-input {
+  pointer-events: none;
+  background-color: rgb(246, 246, 246);
+}
+
+input[type="text"].tag-input {
+  color: #000;
+  font-weight: 600;
+}
+
+.tag-item {
+  flex-basis: 100px;
+}
+
+.tag-item-count {
+  position: relative;
+  left: 3px;
+}
+
+.tags-header {
+  text-align: center;
+}
+
+.selected-tag {
+  color: rgb(249, 249, 249);
+}

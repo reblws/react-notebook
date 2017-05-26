@@ -2,10 +2,17 @@ body {
   font-family: sans-serif;
 }
 
-textarea:focus, input:focus {
+input:focus {
   outline: none;
 }
 
-textarea, input {
+input, textarea {
   border: 0;
+}
+
+.app-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
