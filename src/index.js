@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Notebook from './components/Notebook';
 import registerServiceWorker from './registerServiceWorker';
 import './styles/index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Notebook />, document.getElementById('root'));
 registerServiceWorker();

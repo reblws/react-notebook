@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './styles/App.css';
-import Notes from './components/Notes/';
-import Tags from './components/Tags';
+import '../styles/App.css';
+import Notes from './Notes';
+import Tags from './Tags';
 
 const exampleNotes = [
   {
@@ -34,7 +34,7 @@ const exampleNotes = [
   },
 ];
 
-class App extends Component {
+class Notebook extends Component {
   render() {
     return (
       <div className="app-container">
@@ -48,4 +48,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Notebook;
