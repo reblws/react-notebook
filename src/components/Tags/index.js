@@ -12,8 +12,7 @@ class Tags extends React.Component {
     const tagArrays = this.props.notes.map(note => note.tags);
 
     // Get a flat array of every tag that appears in the note list
-    const tagCountsObj = [].concat
-      .apply([], tagArrays)
+    const tagCountsObj = [].concat.apply([], tagArrays)
       .reduce((tagCounts, tag) => {
         if (!tagCounts[tag]) {
           tagCounts[tag] = 0;
@@ -28,6 +27,8 @@ class Tags extends React.Component {
           key={tagName}
           name={tagName}
           count={tagCountsObj[tagName]}
+          currentTag={this.props.currentTag}
+          updateCurrentTag={this.props.updateCurrentTag}
         />
       ));
 

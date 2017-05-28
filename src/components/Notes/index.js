@@ -60,7 +60,7 @@ class Notes extends React.Component {
           updateSearchQuery={this.updateSearchQuery}
           updateSelectedNote={this.updateSelectedNote}
           selectedNote={this.selectedNote()}
-          currentTag={'all'}
+          currentTag={this.props.currentTag}
         />
         <NoteEntry note={this.selectedNote()} />
       </div>

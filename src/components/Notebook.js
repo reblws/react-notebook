@@ -35,13 +35,40 @@ const exampleNotes = [
 ];
 
 class Notebook extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentTag: 'All',
+      notes: exampleNotes, // **TODO** change this**
+    };
+    this.updateCurrentTag = this.updateCurrentTag.bind(this);
+  }
+
+  // Take in a newTag as string and update the current Notebook state
+  // with the new tag.
+  updateCurrentTag(newTag) {
+    this.setState({
+      currentTag: newTag,
+    });
+  }
+
+  currentTagNotes() {
+    if (this.state.currentTag === 'All') return this.state.notes;
+    // If not all just filter the notes that don't contain the currentTag
+    return this.state.notes.filter(note => note.tags.includes(this.state.currentTag));
+  }
+
   render() {
     return (
       <div className="app-container">
-        <Tags notes={exampleNotes} />
+        <Tags
+          notes={this.state.notes}
+          updateCurrentTag={this.updateCurrentTag}
+          currentTag={this.state.currentTag}
+        />
         <Notes
-          notes={exampleNotes}
-          currentTag={'All'}
+          notes={this.currentTagNotes()}
+          currentTag={this.state.currentTag}
         />
       </div>
     );

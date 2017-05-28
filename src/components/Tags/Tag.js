@@ -3,18 +3,22 @@ import React from 'react';
 // Props:
   // name, count
 // **TODO: Fix the tag counter**
-const Tag = props => (
-  <div className="tag-item">
-    <input
-      className="tag-input"
-      type="text"
-      defaultValue={props.name}
-      disabled
-    />
-    {/*<div className="tag-item-count">
-      ({props.count})
-    </div>*/}
-  </div>
-);
+const Tag = (props) => {
+  const isCurrentTag = props.name === props.currentTag;
+  const tagClassName = isCurrentTag ? 'selected-tag' : 'tag-item';
+  return (
+    <div
+      className={tagClassName}
+      onClick={() => props.updateCurrentTag(props.name)}
+    >
+      <input
+        className="tag-input"
+        type="text"
+        value={`${props.name} (${props.count})`}
+        disabled
+      />
+    </div>
+  );
+};
 
 export default Tag;
