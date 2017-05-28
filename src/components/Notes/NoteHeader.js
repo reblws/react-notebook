@@ -9,12 +9,12 @@ const NoteHeader = props => {
       <input
         type="text"
         className="note-title"
-        defaultValue={props.title}
+        value={props.title}
       />
       <input
         type="text"
         className="note-tags"
-        defaultValue={tagString}
+        value={tagString}
       />
     </div>
   );
