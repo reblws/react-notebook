@@ -14,19 +14,29 @@ class Notes extends React.Component {
     this.notesFound = this.notesFound.bind(this);
   }
 
-  updateSearchQuery(query) {
+  updateSearchQuery(event) {
+    const query = event.target.value;
     this.setState({
       searchQuery: query,
     });
   }
 
   notesFound() {
-    if (this.state.searchQuery.length === 0) {
+    if (!this.state.searchQuery) {
       return this.props.notes;
     }
-    return this.props.notes.filter(note => (
-      note.text.includes(this.searchQuery) || note.title.includes(this.searchQuery)
-    ));
+
+    const searchResults = this.props.notes.filter(note => {
+      // Gotta lowercase the results to get matches
+      const searchQuery = this.state.searchQuery.toLowerCase();
+      const noteTitle = note.title.toLowerCase();
+      const noteText = note.text.toLowerCase();
+
+      return (noteTitle.includes(searchQuery)
+        || noteText.includes(searchQuery));
+    });
+
+    return searchResults;
   }
 
   render() {
