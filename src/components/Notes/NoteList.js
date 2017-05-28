@@ -13,6 +13,7 @@ const NoteList = (props) => {
       <NotePreview
         key={note.id}
         id={note.id}
+        isSelectedNote={note.id === props.selectedNote.id}
         note={note}
         tabIndex={noteIndex}
         updateSelectedNote={props.updateSelectedNote}
