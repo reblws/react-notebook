@@ -9,8 +9,10 @@ class Notes extends React.Component {
     super(props);
     this.state = {
       searchQuery: '',
+      selectedNote: this.props.notes[0],
     };
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
+    this.updateSelectedNote = this.updateSelectedNote.bind(this);
     this.notesFound = this.notesFound.bind(this);
   }
 
@@ -19,6 +21,14 @@ class Notes extends React.Component {
     this.setState({
       searchQuery: query,
     });
+  }
+
+  updateSelectedNote(newNoteId) {
+    const newNote = this.props.notes.filter(note => note.id === newNoteId)[0];
+    this.setState({
+      selectedNote: newNote,
+    });
+    console.log(this.state.selectedNote);
   }
 
   notesFound() {
@@ -45,9 +55,10 @@ class Notes extends React.Component {
         <NoteList
           notes={this.notesFound()}
           updateSearchQuery={this.updateSearchQuery}
+          updateSelectedNote={this.updateSelectedNote}
           currentTag={'all'}
         />
-        <NoteEntry note={this.props.notes[0]} />
+        <NoteEntry note={this.state.selectedNote} />
       </div>
     );
   }
