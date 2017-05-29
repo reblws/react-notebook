@@ -23,11 +23,19 @@
 
 /* <NoteList /> */
 
+
+/* container for note-list-previews */
 .note-list {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 100px;
-  flex: 0 0 100px;
+  -ms-flex: 0 0 250px;
+  flex: 0 0 250px;
   border-right: 1px solid rgb(236, 236, 236);
+  overflow: scroll; /* TODO: not the right div to get scrolling... but this works here */
+}
+
+.note-list-previews {
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -36,6 +44,7 @@
 .note-preview {
   padding: 10px;
   border-bottom: 1px solid rgb(236, 236, 236);
+  flex: 0 0 auto;
 }
 
 
