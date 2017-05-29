@@ -43,7 +43,7 @@ class Notebook extends Component {
     };
     this.updateCurrentTag = this.updateCurrentTag.bind(this);
     this.updateNoteStore = this.updateNoteStore.bind(this);
-    // this.createNewNote = this.createNewNote.bind(this);
+    this.createNewNote = this.createNewNote.bind(this);
   }
 
   // Take in a newTag as string and update the current Notebook state
@@ -60,13 +60,33 @@ class Notebook extends Component {
     return this.state.notes.filter(notesOfCurrentTag);
   }
 
+  createNewNote() {
+    const newNote = {
+      id: Math.random() * 10, // **TODO** change this when we get a better schema for notes
+      title: 'New note',
+      text: '',
+      tags: [],
+      dateCreated: Date.now(),
+      dateModified: Date.now(),
+    };
+
+    const newNoteStore = [newNote, ...this.state.notes];
+    this.setState({
+      notes: newNoteStore,
+    });
+  }
+
   // Update a note in the current Notebook store
   updateNoteStore(noteToChangeId, noteKeyToChange, noteValueToChange) {
+    // Grab the note we want to change
     const noteToChange = this.state.notes
       .filter(note => note.id === noteToChangeId)[0];
+
+    // Change its properties
     noteToChange[noteKeyToChange] = noteValueToChange;
     noteToChange.dateModified = Date.now();
 
+    // Redefine our note store and store it
     const newNoteState = this.state.notes.map(note => (
       note.id === noteToChangeId ? noteToChange : note
     ));
@@ -88,6 +108,7 @@ class Notebook extends Component {
           notes={this.currentTagNotes()}
           currentTag={this.state.currentTag}
           updateNoteStore={this.updateNoteStore}
+          createNewNote={this.createNewNote}
         />
       </div>
     );
