@@ -2,6 +2,18 @@ import React from 'react';
 import NoteHeader from './NoteHeader';
 import NoteEditor from './NoteEditor';
 
+// parse tag string
+// '#hey #there #sam' -> ['hey', 'there', 'sam']
+function parseTagString(tagString) {
+  // All tags will be prefixed by a hasthtag
+  const tagPattern = /#([^#]+)/g;
+  const tagsArray = tagString
+    .replace(tagPattern, (match, tag) => tag.trim() + ' ')
+    .split(' ');
+
+  // When we replace the string there's going to be an empty element at the end
+  return tagsArray.slice(0, -1);
+}
 
 
 const NoteEntry = (props) => {
@@ -16,12 +28,18 @@ const NoteEntry = (props) => {
     return props.updateNoteStore(props.note.id, 'title', newNoteTitle);
   };
 
+  const updateNoteTags = (event) => {
+    const newTagsArray = parseTagString(event.target.value);
+    return props.updateNoteStore(props.note.id, 'tags', newTagsArray);
+  };
+
   return (
     <div className="note-container">
       <NoteHeader
         title={props.note.title}
         tags={props.note.tags}
         updateNoteTitle={updateNoteTitle}
+        updateNoteTags={updateNoteTags}
       />
       <div className="separator" />
       <NoteEditor
@@ -31,6 +49,8 @@ const NoteEntry = (props) => {
     </div>
   );
 };
+
+
 
 // This component represents the overall state of a note
 //

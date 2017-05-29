@@ -16,6 +16,7 @@ const NoteHeader = props => {
         type="text"
         className="note-tags"
         value={tagString}
+        onChange={props.updateNoteTags}
       />
     </div>
   );
