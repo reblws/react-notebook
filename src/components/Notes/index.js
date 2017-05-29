@@ -64,7 +64,10 @@ class Notes extends React.Component {
           selectedNote={this.selectedNote()}
           currentTag={this.props.currentTag}
         />
-        <NoteEntry note={this.selectedNote()} />
+        <NoteEntry
+          note={this.selectedNote()}
+          updateNoteStore={this.props.updateNoteStore}
+        />
       </div>
     );
   }

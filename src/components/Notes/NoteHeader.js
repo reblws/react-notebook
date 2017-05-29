@@ -10,6 +10,7 @@ const NoteHeader = props => {
         type="text"
         className="note-title"
         value={props.title}
+        onChange={props.updateNoteTitle}
       />
       <input
         type="text"

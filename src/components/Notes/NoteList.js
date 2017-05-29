@@ -25,7 +25,9 @@ const NoteList = (props) => {
       <button onClick={props.createNewNote}>Add Note</button>
       <SearchBar updateSearchQuery={props.updateSearchQuery} />
       <div className="separator" />
-      {previewList}
+      <div className="note-list-previews">
+        {previewList}
+      </div>
     </div>
   );
 };
