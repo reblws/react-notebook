@@ -4,6 +4,10 @@ const NotePreview = (props) => {
   const className = props.isSelectedNote
     ? 'note-selected-preview note-preview'
     : 'note-preview';
+  const notePreviewToShow = props.note.text.length > 30
+    ? props.note.text.substr(0, 50)
+    : props.note.text;
+
   return (
     <div
       onClick={() => props.updateSelectedNote(props.id)}
@@ -14,9 +18,7 @@ const NotePreview = (props) => {
         {props.note.title}
       </div>
       <div className="note-text-preview">
-        {props.note.text.length > 30
-          ? props.note.text.substr(0, 30)
-          : props.note.text}
+        {notePreviewToShow}
       </div>
       <div className="note-date-preview">
         {props.note.dateCreated}

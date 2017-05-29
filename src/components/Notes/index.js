@@ -59,6 +59,7 @@ class Notes extends React.Component {
           notes={this.notesFound()}
           updateSearchQuery={this.updateSearchQuery}
           updateSelectedNote={this.updateSelectedNote}
+          createNewNote={this.props.createNewNote}
           selectedNote={this.selectedNote()}
           currentTag={this.props.currentTag}
         />

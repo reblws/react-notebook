@@ -11,12 +11,14 @@ const Tag = (props) => {
       className={tagClassName}
       onClick={() => props.updateCurrentTag(props.name)}
     >
-      <input
-        className="tag-input"
-        type="text"
-        value={`${props.name} (${props.count})`}
-        disabled
-      />
+      <a>
+        <input
+          className="tag-input"
+          type="text"
+          value={`${props.name} (${props.count})`}
+          disabled
+        />
+      </a>
     </div>
   );
 };

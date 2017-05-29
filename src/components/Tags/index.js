@@ -3,6 +3,17 @@ import TagsHeader from './TagsHeader';
 import Tag from './Tag';
 import '../../styles/Tags.css';
 
+
+// Given a flat array of all tags, count the occurrence of each tag
+// and return an object containing the counts
+function reduceToTagCount(tagCounts, tag) {
+  if (!tagCounts[tag]) {
+    tagCounts[tag] = 0;
+  }
+  tagCounts[tag] += 1;
+  return tagCounts;
+}
+
 class Tags extends React.Component {
   constructor(props) {
     super(props);
@@ -13,13 +24,7 @@ class Tags extends React.Component {
 
     // Get a flat array of every tag that appears in the note list
     const tagCountsObj = [].concat.apply([], tagArrays)
-      .reduce((tagCounts, tag) => {
-        if (!tagCounts[tag]) {
-          tagCounts[tag] = 0;
-        }
-        tagCounts[tag] += 1;
-        return tagCounts;
-      }, {});
+      .reduce(reduceToTagCount, { All: this.props.notes.length });
 
     const tagCountsArray = Object.keys(tagCountsObj)
       .map(tagName => (
@@ -44,3 +49,4 @@ class Tags extends React.Component {
 }
 
 export default Tags;
+

@@ -42,6 +42,7 @@ class Notebook extends Component {
       notes: exampleNotes, // **TODO** change this**
     };
     this.updateCurrentTag = this.updateCurrentTag.bind(this);
+    this.createNewNote = this.createNewNote.bind(this);
   }
 
   // Take in a newTag as string and update the current Notebook state
@@ -54,8 +55,22 @@ class Notebook extends Component {
 
   currentTagNotes() {
     if (this.state.currentTag === 'All') return this.state.notes;
-    // If not all just filter the notes that don't contain the currentTag
-    return this.state.notes.filter(note => note.tags.includes(this.state.currentTag));
+    const notesOfCurrentTag = note => note.tags.includes(this.state.currentTag);
+    return this.state.notes.filter(notesOfCurrentTag);
+  }
+
+  createNewNote() {
+    const newNote = {
+      id: Math.random() * 10,
+      title: 'New note',
+      text: '',
+      tags: [],
+      dateCreated: Date.now(),
+    };
+
+    this.setState({
+      notes: [newNote, ...this.state.notes],
+    });
   }
 
   render() {
@@ -69,6 +84,7 @@ class Notebook extends Component {
         <Notes
           notes={this.currentTagNotes()}
           currentTag={this.state.currentTag}
+          createNewNote={this.createNewNote}
         />
       </div>
     );

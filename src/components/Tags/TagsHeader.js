@@ -6,4 +6,5 @@ const TagsHeader = props => (
   </div>
 );
 
+
 export default TagsHeader;
