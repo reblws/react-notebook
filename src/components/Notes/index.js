@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteEntry from './NoteEntry';
 import NoteList from './NoteList';
+import '../../styles/Notes.css';
 
 // Takes in tag-state and is in charge of filtering out unwanted notes before
 // passing them onto children
@@ -24,9 +25,9 @@ class Notes extends React.Component {
   }
 
   updateSelectedNote(newNoteId) {
-    const newNote = this.props.notes.filter(note => note.id === newNoteId)[0];
+    const selectedNote = this.props.notes.filter(note => note.id === newNoteId)[0];
     this.setState({
-      selectedNote: newNote,
+      selectedNote,
     });
   }
 
