@@ -10,7 +10,11 @@ class TagEditor extends React.Component {
 
   static parseTagString(tagString) {
     const hashtagPattern = /\s*?#/g;
-    return tagString.split(hashtagPattern);
+    // First element's gonna be blank with this pattern on split
+    // so slice the first el
+    return tagString
+      .split(hashtagPattern)
+      .slice(1);
   }
 
   constructor(props) {
@@ -18,24 +22,26 @@ class TagEditor extends React.Component {
     this.state = {
       tagString: TagEditor.joinTagArray(this.props.tags),
     };
-    this.handleTagChange = this.handleTagChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.saveNoteState = this.saveNoteState.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.id === this.props.id) return;
-    // Save state into store before changing when new note selected
-    const tagSnapShot = TagEditor.parseTagString(this.state.tagString);
-    this.props.updateNoteTags(tagSnapShot);
-
+    // Make sure we save before we re-render
+    this.saveNoteState();
+    // Set the new tag's state
     this.setState({
       tagString: TagEditor.joinTagArray(nextProps.tags),
     });
   }
 
+  saveNoteState() {
+    const currentTagState = TagEditor.parseTagString(this.state.tagString);
+    this.props.updateNoteTags(currentTagState);
+  }
 
-  handleTagChange(event) {
-    // Handle updating local store somehow
-    //this.props.updateNoteTags
+  handleInputChange(event) {
     this.setState({
       tagString: event.target.value,
     });
@@ -47,7 +53,8 @@ class TagEditor extends React.Component {
         type="text"
         className="note-tags"
         value={this.state.tagString}
-        onChange={this.handleTagChange}
+        onChange={this.handleInputChange}
+        onBlur={this.saveNoteState}
       />
     );
   }
