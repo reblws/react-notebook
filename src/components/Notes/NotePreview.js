@@ -7,9 +7,15 @@ const NotePreview = (props) => {
   const notePreviewToShow = props.note.text.length > 30
     ? props.note.text.substr(0, 50)
     : props.note.text;
+  const noteDateString = (unixTime) => {
+    const date = new Date(unixTime);
+    return `${date.toDateString()} ${date.toTimeString().slice(0, 8)}`;
+  };
 
   return (
     <div
+      role="option"
+      aria-selected={props.isSelectedNote}
       onClick={() => props.updateSelectedNote(props.id)}
       className={className}
       tabIndex={props.tabIndex}
@@ -21,7 +27,7 @@ const NotePreview = (props) => {
         {notePreviewToShow}
       </div>
       <div className="note-date-preview">
-        {props.note.dateCreated}
+        {noteDateString(props.note.dateCreated)}
       </div>
     </div>
   );
