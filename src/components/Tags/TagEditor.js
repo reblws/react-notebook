@@ -23,6 +23,10 @@ class TagEditor extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.id === this.props.id) return;
+    // Save state into store before changing when new note selected
+    const tagSnapShot = TagEditor.parseTagString(this.state.tagString);
+    this.props.updateNoteStore(tagSnapShot);
+
     this.setState({
       tagString: TagEditor.joinTagArray(nextProps.tags),
     });
