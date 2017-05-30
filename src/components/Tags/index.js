@@ -14,39 +14,33 @@ function reduceToTagCount(tagCounts, tag) {
   return tagCounts;
 }
 
-class Tags extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const Tags = (props) => {
+  const tagArrays = props.notes.map(note => note.tags);
 
-  render() {
-    const tagArrays = this.props.notes.map(note => note.tags);
+  // Get a flat array of every tag that appears in the note list
+  const tagCountsObj = [].concat(...tagArrays)
+    .reduce(reduceToTagCount, { All: props.notes.length });
 
-    // Get a flat array of every tag that appears in the note list
-    const tagCountsObj = [].concat.apply([], tagArrays)
-      .reduce(reduceToTagCount, { All: this.props.notes.length });
+  const tagCountsArray = Object.keys(tagCountsObj)
+    .map(tagName => (
+      <Tag
+        key={tagName}
+        name={tagName}
+        count={tagCountsObj[tagName]}
+        currentTag={props.currentTag}
+        updateCurrentTag={props.updateCurrentTag}
+      />
+    ));
 
-    const tagCountsArray = Object.keys(tagCountsObj)
-      .map(tagName => (
-        <Tag
-          key={tagName}
-          name={tagName}
-          count={tagCountsObj[tagName]}
-          currentTag={this.props.currentTag}
-          updateCurrentTag={this.props.updateCurrentTag}
-        />
-      ));
-
-    return (
-      <div className="tags-container">
-        <TagsHeader />
-        <div className="tags-list">
-          {tagCountsArray}
-        </div>
+  return (
+    <div className="tags-container">
+      <TagsHeader />
+      <div className="tags-list">
+        {tagCountsArray}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Tags;
 
