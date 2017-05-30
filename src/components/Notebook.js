@@ -54,22 +54,7 @@ class Notebook extends Component {
     });
   }
 
-  currentTagNotes() {
-    if (this.state.currentTag === 'All') return this.state.notes;
-    const notesOfCurrentTag = note => note.tags.includes(this.state.currentTag);
-    return this.state.notes.filter(notesOfCurrentTag);
-  }
-
-  createNewNote() {
-    const newNote = {
-      id: Math.random() * 10, // **TODO** change this when we get a better schema for notes
-      title: `New Note ${this.state.notes.length + 1}`,
-      text: '',
-      tags: [],
-      dateCreated: Date.now(),
-      dateModified: Date.now(),
-    };
-
+  createNewNote(newNote) {
     const newNoteStore = [newNote, ...this.state.notes];
     this.setState({
       notes: newNoteStore,
@@ -105,7 +90,7 @@ class Notebook extends Component {
           currentTag={this.state.currentTag}
         />
         <Notes
-          notes={this.currentTagNotes()}
+          notes={this.state.notes}
           currentTag={this.state.currentTag}
           updateNoteStore={this.updateNoteStore}
           createNewNote={this.createNewNote}

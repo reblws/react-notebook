@@ -6,6 +6,11 @@ import '../../styles/Notes.css';
 // Takes in tag-state and is in charge of filtering out unwanted notes before
 // passing them onto children
 class Notes extends React.Component {
+
+  static findNoteById(targetId, notesArray) {
+    return notesArray.filter(note => note.id === targetId)[0];
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +20,31 @@ class Notes extends React.Component {
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
     this.updateSelectedNote = this.updateSelectedNote.bind(this);
     this.notesFound = this.notesFound.bind(this);
+    this.createAndSwitchToNote = this.createAndSwitchToNote.bind(this);
+  }
+
+  createAndSwitchToNote() {
+    const newNoteTags = (this.props.currentTag !== 'All')
+      ? [this.props.currentTag]
+      : [];
+    const newNote = {
+      id: Math.random() * 10, // **TODO** change this when we get a better schema for notes
+      title: `New Note ${this.props.notes.length + 1}`,
+      text: '',
+      tags: newNoteTags,
+      dateCreated: Date.now(),
+      dateModified: Date.now(),
+    };
+
+    this.props.createNewNote(newNote);
+
+    this.updateSelectedNote(newNote.id);
+  }
+
+  currentTagNotes() {
+    if (this.props.currentTag === 'All') return this.props.notes;
+    const notesOfCurrentTag = note => note.tags.includes(this.props.currentTag);
+    return this.props.notes.filter(notesOfCurrentTag);
   }
 
   updateSearchQuery(event) {
@@ -25,10 +55,9 @@ class Notes extends React.Component {
   }
 
   updateSelectedNote(newNoteId) {
-    const selectedNote = this.props.notes.filter(note => note.id === newNoteId)[0];
-    this.setState({
-      selectedNote,
-    });
+    this.setState((prevState, props) => (
+      { selectedNote: Notes.findNoteById(newNoteId, props.notes) }
+    ));
   }
 
   selectedNote() {
@@ -36,11 +65,9 @@ class Notes extends React.Component {
   }
 
   notesFound() {
-    if (!this.state.searchQuery) {
-      return this.props.notes;
-    }
+    if (!this.state.searchQuery) return this.currentTagNotes();
 
-    const searchResults = this.props.notes.filter(note => {
+    const searchResults = this.currentTagNotes().filter((note) => {
       // Gotta lowercase the results to get matches
       const searchQuery = this.state.searchQuery.toLowerCase();
       const noteTitle = note.title.toLowerCase();
@@ -60,7 +87,7 @@ class Notes extends React.Component {
           notes={this.notesFound()}
           updateSearchQuery={this.updateSearchQuery}
           updateSelectedNote={this.updateSelectedNote}
-          createNewNote={this.props.createNewNote}
+          createAndSwitchToNote={this.createAndSwitchToNote}
           selectedNote={this.selectedNote()}
           currentTag={this.props.currentTag}
         />
