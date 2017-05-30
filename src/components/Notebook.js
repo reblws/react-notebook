@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
 import Notes from './Notes';
 import Tags from './Tags';
+import '../styles/App.css';
 
 const exampleNotes = [
   {
@@ -27,9 +27,9 @@ const exampleNotes = [
   },
   {
     id: 121113,
-    title: 'These memories will be lost in time',
+    title: 'These moments will be lost in time',
     text: 'Like tears in rain',
-    tags: ['dumk', 'deep'],
+    tags: ['dumk', 'deep', 'bladerunner', 'movies'],
     dateCreated: Date.now(),
   },
 ];
@@ -63,7 +63,7 @@ class Notebook extends Component {
   createNewNote() {
     const newNote = {
       id: Math.random() * 10, // **TODO** change this when we get a better schema for notes
-      title: 'New note',
+      title: `New Note ${this.state.notes.length + 1}`,
       text: '',
       tags: [],
       dateCreated: Date.now(),
