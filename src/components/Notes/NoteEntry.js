@@ -8,7 +8,7 @@ function parseTagString(tagString) {
   // All tags will be prefixed by a hasthtag
   const tagPattern = /#([^#]+)/g;
   const tagsArray = tagString
-    .replace(tagPattern, (match, tag) => tag.trim() + ' ')
+    .replace(tagPattern, (match, tag) => `${tag.trim()} `)
     .split(' ');
 
   // When we replace the string there's going to be an empty element at the end
@@ -28,14 +28,15 @@ const NoteEntry = (props) => {
     return props.updateNoteStore(props.note.id, 'title', newNoteTitle);
   };
 
-  const updateNoteTags = (event) => {
-    const newTagsArray = parseTagString(event.target.value);
+  const updateNoteTags = (newTagsArray) => {
+    // const newTagsArray = parseTagString(event.target.value);
     return props.updateNoteStore(props.note.id, 'tags', newTagsArray);
   };
 
   return (
     <div className="note-container">
       <NoteHeader
+        id={props.note.id}
         title={props.note.title}
         tags={props.note.tags}
         updateNoteTitle={updateNoteTitle}
