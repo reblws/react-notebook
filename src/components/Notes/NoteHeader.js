@@ -1,9 +1,7 @@
 import React from 'react';
+import TagEditor from '../Tags/TagEditor';
 
-const NoteHeader = props => {
-  const tagString = props.tags
-    .map(tag => `#${tag}`)
-    .join(' ');
+const NoteHeader = (props) => {
   return (
     <div className="note-header">
       <input
@@ -12,14 +10,14 @@ const NoteHeader = props => {
         value={props.title}
         onChange={props.updateNoteTitle}
       />
-      <input
-        type="text"
-        className="note-tags"
-        value={tagString}
-        onChange={props.updateNoteTags}
+      <TagEditor
+        id={props.id}
+        tags={props.tags}
+        updateNoteTags={props.updateNoteTags}
       />
     </div>
   );
 };
+
 
 export default NoteHeader;
