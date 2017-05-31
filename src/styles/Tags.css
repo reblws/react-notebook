@@ -5,12 +5,6 @@
   max-width: 150px;
 }
 
-/* <Tag> */
-.tag-input {
-  pointer-events: none;
-  /*background-color: rgb(246, 246, 246);*/
-}
-
 input[type="text"].tag-input {
   color: #000;
   font-weight: 600;
@@ -35,4 +29,10 @@ input[type="text"].tag-input {
 
 .selected-tag input[type="text"].tag-input {
   color: red; /* **TODO** better colors exist */
+}
+
+.tag-ctrl,
+.tag-ctrl:hover,
+.tag-ctrl:active {
+  cursor: pointer;
 }
