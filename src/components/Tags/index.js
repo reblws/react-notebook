@@ -8,11 +8,10 @@ import '../../styles/Tags.css';
 // Given a flat array of all tags, count the occurrence of each tag
 // and return an object containing the counts
 function reduceToTagCount(tagCounts, tag) {
-  if (!tagCounts[tag]) {
-    tagCounts[tag] = 0;
-  }
-  tagCounts[tag] += 1;
-  return tagCounts;
+  const tagCount = (tagCounts[tag]) ? tagCounts[tag] + 1 : 1;
+  const newTagCount = {};
+  newTagCount[tag] = tagCount;
+  return Object.assign(tagCounts, newTagCount);
 }
 
 const Tags = (props) => {
