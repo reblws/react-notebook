@@ -35,6 +35,15 @@ const exampleNotes = [
 ];
 
 class Notebook extends Component {
+
+  static replaceTags(oldTag, newTag, tagsArray) {
+    const filteredArray = tagsArray.filter(tag => tag !== oldTag);
+    return [
+      ...filteredArray,
+      newTag,
+    ];
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -42,6 +51,7 @@ class Notebook extends Component {
       notes: exampleNotes, // **TODO** change this**
     };
     this.updateCurrentTag = this.updateCurrentTag.bind(this);
+    this.updateAllTags = this.updateAllTags.bind(this);
     this.updateNoteStore = this.updateNoteStore.bind(this);
     this.createNewNote = this.createNewNote.bind(this);
   }
@@ -54,6 +64,16 @@ class Notebook extends Component {
     });
   }
 
+  updateAllTags(oldTag, newTag) {
+    this.state.notes
+      .filter(note => note.tags.includes(oldTag))
+      .forEach((note) => {
+        const newNoteTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
+        this.updateNoteStore(note.id, 'tags', newNoteTagsArray);
+      });
+    this.updateCurrentTag(newTag);
+  }
+
   createNewNote(newNote) {
     const newNoteStore = [newNote, ...this.state.notes];
     this.setState({
@@ -61,14 +81,15 @@ class Notebook extends Component {
     });
   }
 
+
   // Update a note in the current Notebook store
-  updateNoteStore(noteToChangeId, noteKeyToChange, noteValueToChange) {
+  updateNoteStore(noteToChangeId, noteKeyToChange, valueToChangeTo) {
     // Grab the note we want to change
     const noteToChange = this.state.notes
       .filter(note => note.id === noteToChangeId)[0];
 
     // Change its properties
-    noteToChange[noteKeyToChange] = noteValueToChange;
+    noteToChange[noteKeyToChange] = valueToChangeTo;
     noteToChange.dateModified = Date.now();
 
     // Redefine our note store and store it
@@ -88,6 +109,7 @@ class Notebook extends Component {
           notes={this.state.notes}
           updateCurrentTag={this.updateCurrentTag}
           currentTag={this.state.currentTag}
+          updateAllTags={this.updateAllTags}
         />
         <Notes
           notes={this.state.notes}
