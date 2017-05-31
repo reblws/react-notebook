@@ -1,33 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+class Tag extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      renameIsActive: false,
+      tagName: this.props.name,
+    };
+    this.onChange = this.onChange.bind(this);
+    this.toggleRename = this.toggleRename.bind(this);
+    this.tagControlOnClick = this.tagControlOnClick.bind(this);
+  }
 
-// Props:
-  // name, count
-// **TODO: Fix the tag counter**
-const Tag = (props) => {
-  const isCurrentTag = props.name === props.currentTag;
-  const tagClassName = isCurrentTag ? 'selected-tag' : 'tag-item';
-  return (
-    <div className={tagClassName} >
-      <input
-        role="option"
-        aria-selected={isCurrentTag}
-        onClick={() => props.updateCurrentTag(props.name)}
-        className="tag-input"
-        type="text"
-        value={`${props.name} (${props.count})`}
-        disabled
-      />
-    </div>
-  );
-};
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      tagName: nextProps.name,
+    });
+  }
+
+  onChange(event) {
+    const tagName = event.target.value;
+    this.setState({
+      tagName,
+    });
+  }
+
+  tagControlOnClick(event) {
+    console.log(event);
+  }
+
+  toggleRename() {
+    this.setState({
+      renameIsActive: !this.state.renameIsActive,
+    });
+  }
+
+  render() {
+    const disabledInput = this.props.isCurrentTag && this.state.renameIsActive;
+
+  }
+}
+
 
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
-  currentTag: PropTypes.string.isRequired,
   updateCurrentTag: PropTypes.func.isRequired,
+  updateAllTags: PropTypes.func.isRequired,
+  isCurrentTag: PropTypes.bool.isRequired,
 };
 
 export default Tag;
