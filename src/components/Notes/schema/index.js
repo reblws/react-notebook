@@ -5,8 +5,8 @@ const noteSchema = {
   title: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // dateCreated: PropTypes.int.isRequired,
-  dateModified: PropTypes.int,
+  dateCreated: PropTypes.number.isRequired,
+  dateModified: PropTypes.number,
 };
 
 export default noteSchema;

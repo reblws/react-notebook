@@ -35,7 +35,7 @@ const Tags = (props) => {
   return (
     <div className="tags-container">
       <TagsHeader />
-      <div className="tags-list">
+      <div className="tags-list" role="listbox">
         {tagCountsArray}
       </div>
     </div>

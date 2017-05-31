@@ -11,7 +11,7 @@ const NoteEditor = props => (
 
 NoteEditor.propTypes = {
   updateNoteContent: PropTypes.func.isRequired,
-  text: PropTypes.text,
+  text: PropTypes.string,
 };
 
 NoteEditor.defaultProps = {

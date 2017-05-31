@@ -35,8 +35,6 @@ const NotePreview = (props) => {
   );
 };
 
-
-
 NotePreview.propTypes = {
   isSelectedNote: PropTypes.bool.isRequired,
   note: PropTypes.shape(noteSchema).isRequired,

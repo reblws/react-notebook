@@ -9,18 +9,16 @@ const Tag = (props) => {
   const isCurrentTag = props.name === props.currentTag;
   const tagClassName = isCurrentTag ? 'selected-tag' : 'tag-item';
   return (
-    <div
-      className={tagClassName}
-      onClick={() => props.updateCurrentTag(props.name)}
-    >
-      <a>
-        <input
-          className="tag-input"
-          type="text"
-          value={`${props.name} (${props.count})`}
-          disabled
-        />
-      </a>
+    <div className={tagClassName} >
+      <input
+        role="option"
+        aria-selected={isCurrentTag}
+        onClick={() => props.updateCurrentTag(props.name)}
+        className="tag-input"
+        type="text"
+        value={`${props.name} (${props.count})`}
+        disabled
+      />
     </div>
   );
 };
