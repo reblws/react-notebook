@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TagsHeader = props => (
+const TagsHeader = () => (
   <div className="tags-header">
     <strong>Tags</strong>
   </div>

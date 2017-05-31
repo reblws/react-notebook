@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NoteEntry from './NoteEntry';
 import NoteList from './NoteList';
 import '../../styles/Notes.css';
@@ -99,5 +100,12 @@ class Notes extends React.Component {
     );
   }
 }
+
+Notes.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  currentTag: PropTypes.string.isRequired,
+  updateNoteStore: PropTypes.func.isRequired,
+  createNewNote: PropTypes.func.isRequired,
+};
 
 export default Notes;

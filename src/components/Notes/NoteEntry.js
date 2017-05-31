@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NoteHeader from './NoteHeader';
 import NoteEditor from './NoteEditor';
+import noteSchema from './schema';
 
 const NoteEntry = (props) => {
   // Define closures over updateNoteStore
@@ -35,6 +37,11 @@ const NoteEntry = (props) => {
       />
     </div>
   );
+};
+
+NoteEntry.propTypes = {
+  updateNoteStore: PropTypes.func.isRequired,
+  note: PropTypes.shape(noteSchema).isRequired,
 };
 
 export default NoteEntry;

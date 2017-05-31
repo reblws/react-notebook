@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TagsHeader from './TagsHeader';
 import Tag from './Tag';
 import '../../styles/Tags.css';
@@ -40,6 +41,11 @@ const Tags = (props) => {
       </div>
     </div>
   );
+};
+
+Tags.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.Object).isRequired,
+  updateCurrentTag: PropTypes.func.isRequired,
 };
 
 export default Tags;

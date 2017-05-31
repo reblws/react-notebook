@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 // Props:
   // name, count
@@ -21,6 +23,13 @@ const Tag = (props) => {
       </a>
     </div>
   );
+};
+
+Tag.propTypes = {
+  name: PropTypes.string.isRequired,
+  count: PropTypes.number.isRequired,
+  currentTag: PropTypes.string.isRequired,
+  updateCurrentTag: PropTypes.func.isRequired,
 };
 
 export default Tag;

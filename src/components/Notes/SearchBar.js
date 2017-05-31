@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SearchBar = props => (
   <div className="searchbar-container">
@@ -9,5 +10,9 @@ const SearchBar = props => (
     />
   </div>
 );
+
+SearchBar.propTypes = {
+  updateSearchQuery: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

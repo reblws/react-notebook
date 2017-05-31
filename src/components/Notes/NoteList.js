@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import NotePreview from './NotePreview';
 
@@ -30,6 +31,14 @@ const NoteList = (props) => {
       </div>
     </div>
   );
+};
+
+NoteList.propTypes = {
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateSelectedNote: PropTypes.func.isRequired,
+  currentTag: PropTypes.string.isRequired,
+  createAndSwitchToNote: PropTypes.func.isRequired,
+  updateSearchQuery: PropTypes.func.isRequired,
 };
 
 export default NoteList;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TagEditor from '../Tags/TagEditor';
 
 const NoteHeader = props => (
@@ -17,5 +18,12 @@ const NoteHeader = props => (
   </div>
 );
 
+NoteHeader.propTypes = {
+  title: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  updateNoteTitle: PropTypes.func.isRequired,
+  updateNoteTags: PropTypes.func.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default NoteHeader;

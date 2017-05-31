@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import noteSchema from './schema/';
 
 const NotePreview = (props) => {
   const className = props.isSelectedNote
@@ -32,5 +34,13 @@ const NotePreview = (props) => {
     </div>
   );
 };
+
+
+
+NotePreview.propTypes = {
+  isSelectedNote: PropTypes.bool.isRequired,
+  note: PropTypes.shape(noteSchema).isRequired,
+};
+
 
 export default NotePreview;
