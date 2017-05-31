@@ -27,8 +27,9 @@ const Tags = (props) => {
         key={tagName}
         name={tagName}
         count={tagCountsObj[tagName]}
-        currentTag={props.currentTag}
+        isCurrentTag={props.currentTag === tagName}
         updateCurrentTag={props.updateCurrentTag}
+        updateAllTags={props.updateAllTags}
       />
     ));
 
@@ -43,8 +44,9 @@ const Tags = (props) => {
 };
 
 Tags.propTypes = {
-  notes: PropTypes.arrayOf(PropTypes.Object).isRequired,
   updateCurrentTag: PropTypes.func.isRequired,
+  updateAllTags: PropTypes.func.isRequired,
+  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default Tags;
