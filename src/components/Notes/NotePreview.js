@@ -18,7 +18,7 @@ const NotePreview = (props) => {
     <div
       role="option"
       aria-selected={props.isSelectedNote}
-      onClick={() => props.updateSelectedNote(props.id)}
+      onClick={() => props.updateSelectedNote(props.note.id)}
       className={className}
       tabIndex={props.tabIndex}
     >
@@ -40,6 +40,8 @@ const NotePreview = (props) => {
 NotePreview.propTypes = {
   isSelectedNote: PropTypes.bool.isRequired,
   note: PropTypes.shape(noteSchema).isRequired,
+  tabIndex: PropTypes.number.isRequired,
+  updateSelectedNote: PropTypes.func.isRequired,
 };
 
 
