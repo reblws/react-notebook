@@ -59,6 +59,7 @@ class TagEditor extends React.Component {
       <input
         type="text"
         className="note-tags"
+        placeholder="Enter some tags..."
         value={this.state.tagString}
         onChange={this.handleInputChange}
         onBlur={this.saveNoteState}
