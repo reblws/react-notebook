@@ -30,6 +30,7 @@ const Tags = (props) => {
         isCurrentTag={props.currentTag === tagName}
         updateCurrentTag={props.updateCurrentTag}
         updateAllTags={props.updateAllTags}
+        deleteAllTags={props.deleteAllTags}
       />
     ));
 
@@ -46,6 +47,7 @@ const Tags = (props) => {
 Tags.propTypes = {
   updateCurrentTag: PropTypes.func.isRequired,
   updateAllTags: PropTypes.func.isRequired,
+  deleteAllTags: PropTypes.func.isRequired,
   notes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

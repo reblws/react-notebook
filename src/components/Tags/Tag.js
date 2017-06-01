@@ -11,22 +11,20 @@ class Tag extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.toggleRename = this.toggleRename.bind(this);
     this.tagControlOnClick = this.tagControlOnClick.bind(this);
+    this.deleteTagOnClick = this.deleteTagOnClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      name: nextProps.name,
-    });
+    this.setState({ name: nextProps.name });
   }
 
   onChange(event) {
     const name = event.target.value;
-    this.setState({
-      name,
-    });
+    this.setState({ name });
   }
 
   tagControlOnClick(event) {
+    event.stopPropagation();
     switch (event.target.textContent) {
       case 'Save': {
         const newTagName = this.state.name;
@@ -37,9 +35,17 @@ class Tag extends React.Component {
         this.toggleRename();
         break;
       }
-      default:
+      case 'Delete': {
+        this.props.deleteAllTags(this.props.name);
         break;
+      }
+      default: break;
     }
+  }
+
+  deleteTagOnClick(event) {
+    event.stopPropagation();
+    this.props.deleteAllTags(this.props.name);
   }
 
   toggleRename() {
@@ -49,7 +55,7 @@ class Tag extends React.Component {
   }
 
   render() {
-    const disabledInput = this.props.isCurrentTag && this.state.renameIsActive;
+    const disabledInput = !(this.props.isCurrentTag && this.state.renameIsActive);
     return (
       <div
         role="option"
@@ -62,7 +68,7 @@ class Tag extends React.Component {
           type="text"
           value={this.state.name}
           onChange={this.onChange}
-          disabled={!disabledInput}
+          disabled={disabledInput}
         />
         <span>Count: {this.props.count}</span>
         {(this.props.isCurrentTag && this.props.name !== 'All') &&
@@ -74,9 +80,11 @@ class Tag extends React.Component {
             >
               {this.state.renameIsActive ? 'Save' : 'Rename'}
             </a>
+            <br />
             <a
               role="button"
               className="tag-ctrl"
+              onClick={this.deleteTagOnClick}
             >
               Delete
             </a>
@@ -93,6 +101,7 @@ Tag.propTypes = {
   updateCurrentTag: PropTypes.func.isRequired,
   updateAllTags: PropTypes.func.isRequired,
   isCurrentTag: PropTypes.bool.isRequired,
+  deleteAllTags: PropTypes.func.isRequired,
 };
 
 export default Tag;
