@@ -67,11 +67,13 @@ class Notebook extends Component {
   updateAllTags(oldTag, newTag) {
     this.state.notes
       .filter(note => note.tags.includes(oldTag))
-      .forEach((note) => {
+      .forEach((note, index, array) => {
         const newNoteTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
         this.updateNoteStore(note.id, 'tags', newNoteTagsArray);
+        if (index === (array.length - 1)) {
+          this.updateCurrentTag(newTag);
+        }
       });
-    this.updateCurrentTag(newTag);
   }
 
   createNewNote(newNote) {

@@ -6,7 +6,7 @@ class Tag extends React.Component {
     super(props);
     this.state = {
       renameIsActive: false,
-      tagName: this.props.name,
+      name: this.props.name,
     };
     this.onChange = this.onChange.bind(this);
     this.toggleRename = this.toggleRename.bind(this);
@@ -15,19 +15,31 @@ class Tag extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      tagName: nextProps.name,
+      name: nextProps.name,
     });
   }
 
   onChange(event) {
-    const tagName = event.target.value;
+    const name = event.target.value;
     this.setState({
-      tagName,
+      name,
     });
   }
 
   tagControlOnClick(event) {
-    console.log(event);
+    switch (event.target.textContent) {
+      case 'Save': {
+        const newTagName = this.state.name;
+        this.props.updateAllTags(this.props.name, newTagName);
+        break;
+      }
+      case 'Rename': {
+        this.toggleRename();
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   toggleRename() {
@@ -38,10 +50,42 @@ class Tag extends React.Component {
 
   render() {
     const disabledInput = this.props.isCurrentTag && this.state.renameIsActive;
-
+    return (
+      <div
+        role="option"
+        className={this.props.isCurrentTag ? 'selected-tag' : 'tag-item'}
+        aria-selected={this.props.isCurrentTag}
+        onClick={() => this.props.updateCurrentTag(this.props.name)}
+      >
+        <input
+          className="tag-input"
+          type="text"
+          value={this.state.name}
+          onChange={this.onChange}
+          disabled={!disabledInput}
+        />
+        <span>Count: {this.props.count}</span>
+        {(this.props.isCurrentTag && this.props.name !== 'All') &&
+          <div>
+            <a
+              role="button"
+              className="tag-ctrl"
+              onClick={this.tagControlOnClick}
+            >
+              {this.state.renameIsActive ? 'Save' : 'Rename'}
+            </a>
+            <a
+              role="button"
+              className="tag-ctrl"
+            >
+              Delete
+            </a>
+          </div>
+        }
+      </div>
+    );
   }
 }
-
 
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
