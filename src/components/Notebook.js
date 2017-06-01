@@ -38,10 +38,11 @@ class Notebook extends Component {
 
   static replaceTags(oldTag, newTag, tagsArray) {
     const filteredArray = tagsArray.filter(tag => tag !== oldTag);
-    return [
-      ...filteredArray,
-      newTag,
-    ];
+    // Delete the tag if empty
+    const arrayToReturn = newTag
+      ? [...filteredArray, newTag]
+      : filteredArray;
+    return arrayToReturn;
   }
 
   constructor(props) {
@@ -59,30 +60,27 @@ class Notebook extends Component {
   // Take in a newTag as string and update the current Notebook state
   // with the new tag.
   updateCurrentTag(newTag) {
-    this.setState({
-      currentTag: newTag,
-    });
+    this.setState({ currentTag: newTag });
   }
 
   updateAllTags(oldTag, newTag) {
     this.state.notes
       .filter(note => note.tags.includes(oldTag))
-      .forEach((note, index, array) => {
+      .forEach((note) => {
         const newNoteTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
         this.updateNoteStore(note.id, 'tags', newNoteTagsArray);
-        if (index === (array.length - 1)) {
-          this.updateCurrentTag(newTag);
-        }
       });
+    this.updateCurrentTag(newTag);
+  }
+
+  deleteAllTags(tagToDelete) {
+    this.updateAllTags(tagToDelete, '');
   }
 
   createNewNote(newNote) {
     const newNoteStore = [newNote, ...this.state.notes];
-    this.setState({
-      notes: newNoteStore,
-    });
+    this.setState({ notes: newNoteStore });
   }
-
 
   // Update a note in the current Notebook store
   updateNoteStore(noteToChangeId, noteKeyToChange, valueToChangeTo) {
@@ -112,6 +110,7 @@ class Notebook extends Component {
           updateCurrentTag={this.updateCurrentTag}
           currentTag={this.state.currentTag}
           updateAllTags={this.updateAllTags}
+          deleteAllTags={this.deleteAllTags}
         />
         <Notes
           notes={this.state.notes}
