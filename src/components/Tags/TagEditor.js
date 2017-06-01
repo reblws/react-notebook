@@ -29,9 +29,13 @@ class TagEditor extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.id === this.props.id) return;
+    const isSameId = nextProps.id === this.props.id;
+    const isSameTags = nextProps.tags === this.props.tags;
+    if (isSameTags && isSameId) return;
     // Make sure we save before we re-render
-    this.saveNoteState();
+    if (isSameTags) {
+      this.saveNoteState();
+    }
     // Set the new tag's state
     this.setState({
       tagString: TagEditor.joinTagArray(nextProps.tags),
