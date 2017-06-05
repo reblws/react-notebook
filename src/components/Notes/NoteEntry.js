@@ -16,10 +16,9 @@ const NoteEntry = (props) => {
     return props.updateNoteStore(props.note.id, 'title', newNoteTitle);
   };
 
-  const updateNoteTags = (newTagsArray) => {
-    // const newTagsArray = parseTagString(event.target.value);
-    return props.updateNoteStore(props.note.id, 'tags', newTagsArray);
-  };
+  const updateNoteTags = (newTagsArray) => (
+    props.updateNoteStore(props.note.id, 'tags', newTagsArray)
+  );
 
   return (
     <div className="note-container">
