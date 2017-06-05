@@ -9,7 +9,7 @@ class Tag extends React.Component {
       name: this.props.name,
     };
     this.onChange = this.onChange.bind(this);
-    this.toggleRename = this.toggleRename.bind(this);
+    this.toggleRenameLabel = this.toggleRenameLabel.bind(this);
     this.tagControlOnClick = this.tagControlOnClick.bind(this);
     this.deleteTagOnClick = this.deleteTagOnClick.bind(this);
   }
@@ -32,7 +32,7 @@ class Tag extends React.Component {
         break;
       }
       case 'Rename': {
-        this.toggleRename();
+        this.toggleRenameLabel();
         break;
       }
       case 'Delete': {
@@ -48,7 +48,7 @@ class Tag extends React.Component {
     this.props.deleteAllTags(this.props.name);
   }
 
-  toggleRename() {
+  toggleRenameLabel() {
     this.setState({
       renameIsActive: !this.state.renameIsActive,
     });

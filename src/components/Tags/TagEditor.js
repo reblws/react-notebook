@@ -25,7 +25,7 @@ class TagEditor extends React.Component {
     this.state = {
       tagString: TagEditor.joinTagArray(this.props.tags),
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.saveNoteState = this.saveNoteState.bind(this);
   }
 
@@ -43,15 +43,15 @@ class TagEditor extends React.Component {
     this.setState({ tagString: TagEditor.joinTagArray(nextProps.tags) });
   }
 
-  saveNoteState() {
-    const currentTagState = TagEditor.parseTagString(this.state.tagString);
-    this.props.updateNoteTags(currentTagState);
-  }
-
-  handleInputChange(event) {
+  onChange(event) {
     this.setState({
       tagString: event.target.value,
     });
+  }
+
+  saveNoteState() {
+    const currentTagState = TagEditor.parseTagString(this.state.tagString);
+    this.props.updateNoteTags(currentTagState);
   }
 
   render() {
@@ -61,7 +61,7 @@ class TagEditor extends React.Component {
         className="note-tags"
         placeholder="Enter some tags..."
         value={this.state.tagString}
-        onChange={this.handleInputChange}
+        onChange={this.onChange}
         onBlur={this.saveNoteState}
       />
     );

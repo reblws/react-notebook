@@ -2,37 +2,7 @@ import React, { Component } from 'react';
 import Notes from './Notes';
 import Tags from './Tags';
 import '../styles/App.css';
-
-const exampleNotes = [
-  {
-    id: 123192,
-    title: 'Test note',
-    text: 'The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog, The quick brown fox jumps over the lazy dog',
-    tags: ['test', 'hi', 'dumk'],
-    dateCreated: Date.now(),
-  },
-  {
-    id: 123,
-    title: 'Fuckk f',
-    text: 'The qutest ',
-    tags: ['dumk'],
-    dateCreated: Date.now(),
-  },
-  {
-    id: 12322,
-    title: 'Peach',
-    text: 'The princess ',
-    tags: ['dumk', 'peach'],
-    dateCreated: Date.now(),
-  },
-  {
-    id: 121113,
-    title: 'These moments will be lost in time',
-    text: 'Like tears in rain',
-    tags: ['dumk', 'deep', 'bladerunner', 'movies'],
-    dateCreated: Date.now(),
-  },
-];
+import testNotes from './testnotes.json';
 
 class Notebook extends Component {
 
@@ -49,7 +19,7 @@ class Notebook extends Component {
     super(props);
     this.state = {
       currentTag: 'All',
-      notes: exampleNotes, // **TODO** change this**
+      notes: testNotes.array, // **TODO** change this**
     };
     this.updateCurrentTag = this.updateCurrentTag.bind(this);
     this.updateAllTags = this.updateAllTags.bind(this);
