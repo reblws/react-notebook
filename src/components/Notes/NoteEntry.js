@@ -6,17 +6,16 @@ import noteSchema from './schema';
 
 const NoteEntry = (props) => {
   // Define closures over updateNoteStore
-  const updateNoteContent = (event) => {
-    const newNoteContent = event.target.value;
-    return props.updateNoteStore(props.note.id, 'text', newNoteContent);
-  };
+  const updateNoteContent = newContent => (
+    props.updateNoteStore(props.note.id, 'text', newContent)
+  );
 
   const updateNoteTitle = (event) => {
     const newNoteTitle = event.target.value;
     return props.updateNoteStore(props.note.id, 'title', newNoteTitle);
   };
 
-  const updateNoteTags = (newTagsArray) => (
+  const updateNoteTags = newTagsArray => (
     props.updateNoteStore(props.note.id, 'tags', newTagsArray)
   );
 
@@ -32,6 +31,7 @@ const NoteEntry = (props) => {
       <div className="separator" />
       <NoteEditor
         text={props.note.text}
+        id={props.note.id}
         updateNoteContent={updateNoteContent}
       />
     </div>

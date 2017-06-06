@@ -35,11 +35,7 @@ class TagEditor extends React.Component {
     const isSameId = nextProps.id === this.props.id;
     // Issue when delete tag doesn't update this component is with this line here
     if (isSameTags && isSameId) return;
-    // Make sure we save before we re-render
-    // if (isSameTags) {
-    //   this.saveNoteState();
-    // }
-    // Set the new tag's state
+
     this.setState({ tagString: TagEditor.joinTagArray(nextProps.tags) });
   }
 

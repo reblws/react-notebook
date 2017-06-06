@@ -4,8 +4,6 @@ import NoteEntry from './NoteEntry';
 import NoteList from './NoteList';
 import '../../styles/Notes.css';
 
-// Takes in tag-state and is in charge of filtering out unwanted notes before
-// passing them onto children
 class Notes extends React.Component {
 
   static findNoteById(targetId, notesArray) {

@@ -22,6 +22,7 @@ const Tags = (props) => {
     .reduce(reduceToTagCount, { All: props.notes.length });
 
   const tagCountsArray = Object.keys(tagCountsObj)
+    .sort((prevTag, nextTag) => tagCountsObj[nextTag] - tagCountsObj[prevTag])
     .map(tagName => (
       <Tag
         key={tagName}
