@@ -1,19 +1,12 @@
 import Immutable from 'immutable';
-import testNotes from 'testnotes.json';
+import json from './testnotes.json';
+import NoteRecord from '../constants/NoteRecord.js';
 
-const NoteRecord = Immutable.Record({
-  id: undefined,
-  title: '',
-  text: '',
-  tags: new Immutable.List(),
-  dateCreated: undefined,
-  dateModified: undefined,
-});
 
 const testNotes = Immutable.List(json.array)
-  .map(note => newNoteRecord(note.tags))
-  .map(noteRecord => {
-    const immutableTags = Immutable.fromJS(noteRecord.tags);
+  .map(note => new NoteRecord(note))
+  .map((noteRecord) => {
+    const immutableTags = Immutable.List(noteRecord.tags);
     return noteRecord.set('tags', immutableTags);
   });
 
