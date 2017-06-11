@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NoteEntry from './NoteEntry';
 import NoteList from './NoteList';
+import NoteRecord from '../../constants/NoteRecord';
+
 import '../../styles/Notes.css';
 
 class Notes extends React.Component {
@@ -14,7 +16,7 @@ class Notes extends React.Component {
     super(props);
     this.state = {
       searchQuery: '',
-      selectedNote: this.props.notes[0],
+      selectedNote: this.props.notes.get(0),
     };
     this.updateSearchQuery = this.updateSearchQuery.bind(this);
     this.updateSelectedNote = this.updateSelectedNote.bind(this);

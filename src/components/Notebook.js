@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
 import Notes from './Notes';
 import Tags from './Tags';
+import testNotes from '../helpers/noterecords'; // load our test notes
 import '../styles/App.css';
-import testNotes from './testnotes.json';
 
 class Notebook extends Component {
 
-  static replaceTags(oldTag, newTag, tagsArray) {
-    const filteredArray = tagsArray.filter(tag => tag !== oldTag);
+  // Rename prevTag as nextTag in tagList
+  static replaceTags(prevTag, nextTag, tagList) {
+    const filteredTagList = tagList
+      .filter(tag => tag !== prevTag);
     // Delete the tag if empty
-    const arrayToReturn = newTag
-      ? [...filteredArray, newTag]
-      : filteredArray;
-    return arrayToReturn;
+    return nextTag
+      ? filteredTagList.push(nextTag)
+      : filteredTagList;
+  }
+
+  static findNoteById(id, notesList) {
+    const noteIndex = notesList.findIndex(note => note.id === id);
+    return notesList.get(noteIndex);
   }
 
   constructor(props) {
     super(props);
     this.state = {
       currentTag: 'All',
-      notes: testNotes.array, // **TODO** change this**
+      notes: testNotes, // **TODO** change this**
     };
     this.updateCurrentTag = this.updateCurrentTag.bind(this);
     this.updateAllTags = this.updateAllTags.bind(this);
@@ -34,33 +40,27 @@ class Notebook extends Component {
   }
 
   updateAllTags(oldTag, newTag) {
-    this.state.notes
-      .filter(note => note.tags.includes(oldTag))
-      .forEach((note) => {
-        const newNoteTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
-        this.updateNoteStore(note.id, 'tags', newNoteTagsArray);
-      });
+    const noteStore = this.state.notes
+      .filter(note => note.tags.includes(oldTag));
+    noteStore.forEach((note) => {
+      const newTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
+      this.updateNoteStore(note.id, 'tags', newTagsArray);
+    });
     this.updateCurrentTag(newTag);
   }
 
-  deleteAllTags(tagToDelete) {
-    this.updateAllTags(tagToDelete, '');
-  }
 
   createNewNote(newNote) {
-    const newNoteStore = [newNote, ...this.state.notes];
+    const newNoteStore = this.state.notes.push(newNote);
     this.setState({ notes: newNoteStore });
   }
 
   // Update a note in the current Notebook store
   updateNoteStore(noteToChangeId, noteKeyToChange, valueToChangeTo) {
-    // Grab the note we want to change
-    const noteToChange = this.state.notes
-      .filter(note => note.id === noteToChangeId)[0];
-
-    // Change its properties
-    noteToChange[noteKeyToChange] = valueToChangeTo;
-    noteToChange.dateModified = Date.now();
+    // Grab and set new values on the note we want to change
+    const noteToChange = Notebook.findNoteById(noteToChangeId, this.state.notes)
+      .set(noteKeyToChange, valueToChangeTo)
+      .set('dateModified', Date.now());
 
     // Redefine our note store and store it
     const newNoteState = this.state.notes.map(note => (
@@ -80,7 +80,6 @@ class Notebook extends Component {
           updateCurrentTag={this.updateCurrentTag}
           currentTag={this.state.currentTag}
           updateAllTags={this.updateAllTags}
-          deleteAllTags={this.deleteAllTags}
         />
         <Notes
           notes={this.state.notes}
