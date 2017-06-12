@@ -11,6 +11,10 @@ input[type="text"].tag-input {
   /*cursor: pointer;*/
 }
 
+.tags-list {
+  overflow: scroll;
+}
+
 .tag-item {
   cursor: pointer;
 }
