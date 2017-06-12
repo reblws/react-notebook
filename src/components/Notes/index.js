@@ -62,7 +62,7 @@ class Notes extends React.Component {
     ));
   }
 
-  selectedNote() {
+  get selectedNote() {
     return this.state.selectedNote;
   }
 
@@ -90,11 +90,11 @@ class Notes extends React.Component {
           updateSearchQuery={this.updateSearchQuery}
           updateSelectedNote={this.updateSelectedNote}
           createAndSwitchToNote={this.createAndSwitchToNote}
-          selectedNote={this.selectedNote()}
+          selectedNote={this.selectedNote}
           currentTag={this.props.currentTag}
         />
         <NoteEntry
-          note={this.selectedNote()}
+          note={this.selectedNote}
           updateNoteStore={this.props.updateNoteStore}
         />
       </div>
