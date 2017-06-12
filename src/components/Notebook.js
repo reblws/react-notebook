@@ -40,12 +40,12 @@ class Notebook extends Component {
   }
 
   updateAllTags(oldTag, newTag) {
-    this.state.notes
-      .filter(note => note.tags.includes(oldTag))
-      .forEach((note) => {
-        const newTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
-        this.updateNoteStore(note.id, 'tags', newTagsArray);
-      });
+    const newNoteState = this.state.notes.map((note) => {
+      if (!note.tags.includes(oldTag)) return note;
+      const newTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
+      return note.set('tags', newTagsArray);
+    });
+    this.setState({ notes: newNoteState });
     this.updateCurrentTag(newTag);
   }
 
@@ -61,7 +61,6 @@ class Notebook extends Component {
       .set(noteKeyToChange, valueToChangeTo)
       .set('dateModified', Date.now());
 
-    // Redefine our note store and store it
     const newNoteState = this.state.notes.map(note => (
       note.id === noteToChangeId ? noteToChange : note
     ));
