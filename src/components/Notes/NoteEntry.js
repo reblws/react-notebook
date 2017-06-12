@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import NoteHeader from './NoteHeader';
 import NoteEditor from './NoteEditor';
 import NoteRecord from '../../constants/NoteRecord';
-import noteSchema from './schema';
 
 const NoteEntry = (props) => {
   // Define closures over updateNoteStore
