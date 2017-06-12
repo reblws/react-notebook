@@ -103,7 +103,7 @@ class Notes extends React.Component {
 }
 
 Notes.propTypes = {
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notes: PropTypes.instanceOf(Immutable.List).isRequired,
   currentTag: PropTypes.string.isRequired,
   updateNoteStore: PropTypes.func.isRequired,
   createNewNote: PropTypes.func.isRequired,

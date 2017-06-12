@@ -65,7 +65,7 @@ class TagEditor extends React.Component {
 TagEditor.propTypes = {
   id: PropTypes.number.isRequired,
   updateNoteTags: PropTypes.func.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 export default TagEditor;

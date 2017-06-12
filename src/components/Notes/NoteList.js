@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import SearchBar from './SearchBar';
 import NotePreview from './NotePreview';
 
@@ -34,7 +35,7 @@ const NoteList = (props) => {
 };
 
 NoteList.propTypes = {
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notes: PropTypes.instanceOf(Immutable.List).isRequired,
   updateSelectedNote: PropTypes.func.isRequired,
   currentTag: PropTypes.string.isRequired,
   createAndSwitchToNote: PropTypes.func.isRequired,

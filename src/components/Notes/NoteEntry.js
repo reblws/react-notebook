@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NoteHeader from './NoteHeader';
 import NoteEditor from './NoteEditor';
+import NoteRecord from '../../constants/NoteRecord';
 import noteSchema from './schema';
 
 const NoteEntry = (props) => {
@@ -40,7 +41,7 @@ const NoteEntry = (props) => {
 
 NoteEntry.propTypes = {
   updateNoteStore: PropTypes.func.isRequired,
-  note: PropTypes.shape(noteSchema).isRequired,
+  note: PropTypes.instanceOf(NoteRecord).isRequired,
 };
 
 export default NoteEntry;

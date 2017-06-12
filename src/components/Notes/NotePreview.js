@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import noteSchema from './schema/';
+import NoteRecord from '../../constants/NoteRecord';
 
 const NotePreview = (props) => {
   const className = props.isSelectedNote
@@ -37,7 +37,7 @@ const NotePreview = (props) => {
 
 NotePreview.propTypes = {
   isSelectedNote: PropTypes.bool.isRequired,
-  note: PropTypes.shape(noteSchema).isRequired,
+  note: PropTypes.instanceOf(NoteRecord).isRequired,
   tabIndex: PropTypes.number.isRequired,
   updateSelectedNote: PropTypes.func.isRequired,
 };

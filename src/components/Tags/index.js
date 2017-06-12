@@ -61,7 +61,7 @@ const Tags = (props) => {
 Tags.propTypes = {
   updateAllTags: PropTypes.func.isRequired,
   updateCurrentTag: PropTypes.func.isRequired,
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notes: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 export default Tags;

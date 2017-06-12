@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import TagEditor from '../Tags/TagEditor';
 
 const NoteHeader = props => (
@@ -23,7 +24,7 @@ NoteHeader.propTypes = {
   id: PropTypes.number.isRequired,
   updateNoteTitle: PropTypes.func.isRequired,
   updateNoteTags: PropTypes.func.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 export default NoteHeader;
