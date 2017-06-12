@@ -8,6 +8,6 @@ const testNotes = Immutable.List(json.array)
   .map((noteRecord) => {
     const immutableTags = Immutable.List(noteRecord.tags);
     return noteRecord.set('tags', immutableTags);
-  });
+  }).sort((prev, next) => prev.dateCreated - next.dateCreated);
 
 export default testNotes;

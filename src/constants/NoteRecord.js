@@ -4,7 +4,7 @@ const NoteRecord = Immutable.Record({
   id: undefined,
   title: '',
   text: '',
-  tags: [],
+  tags: Immutable.List(),
   dateCreated: undefined,
   dateModified: undefined,
 });
