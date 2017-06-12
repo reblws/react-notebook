@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Immutable from 'immutable';
 
 class TagEditor extends React.Component {
 
@@ -14,9 +14,9 @@ class TagEditor extends React.Component {
     const hashtagPattern = /\s*?#/g;
     // First element's gonna be blank with this pattern on split
     // so slice the first el
-    return tagString
-      .split(hashtagPattern)
-      .slice(1);
+    return Immutable.fromJS(
+      tagString.split(hashtagPattern).slice(1),
+    );
   }
 
   constructor(props) {
