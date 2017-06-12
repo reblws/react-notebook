@@ -40,7 +40,7 @@ class Notebook extends Component {
   }
 
   updateAllTags(oldTag, newTag) {
-    const noteStore = this.state.notes
+    this.state.notes
       .filter(note => note.tags.includes(oldTag))
       .forEach((note) => {
         const newTagsArray = Notebook.replaceTags(oldTag, newTag, note.tags);
@@ -50,7 +50,7 @@ class Notebook extends Component {
   }
 
   createNewNote(newNote) {
-    const newNoteStore = this.state.notes.push(newNote);
+    const newNoteStore = this.state.notes.unshift(newNote);
     this.setState({ notes: newNoteStore });
   }
 
