@@ -12,7 +12,8 @@ input[type="text"].tag-input {
 }
 
 .tags-list {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .tag-item {

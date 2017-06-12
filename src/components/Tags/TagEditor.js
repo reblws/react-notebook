@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as areArraysEqual from 'array-equal';
 
 
 class TagEditor extends React.Component {
@@ -29,9 +28,8 @@ class TagEditor extends React.Component {
     this.saveNoteState = this.saveNoteState.bind(this);
   }
 
-
   componentWillReceiveProps(nextProps) {
-    const isSameTags = areArraysEqual(nextProps.tags, this.props.tags);
+    const isSameTags = nextProps.tags.equals(this.props.tags);
     const isSameId = nextProps.id === this.props.id;
     // Issue when delete tag doesn't update this component is with this line here
     if (isSameTags && isSameId) return;

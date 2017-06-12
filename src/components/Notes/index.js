@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import NoteEntry from './NoteEntry';
 import NoteList from './NoteList';
 import NoteRecord from '../../constants/NoteRecord';
@@ -9,7 +10,8 @@ import '../../styles/Notes.css';
 class Notes extends React.Component {
 
   static findNoteById(targetId, notesArray) {
-    return notesArray.filter(note => note.id === targetId)[0];
+    const targetIndex = notesArray.findIndex(note => note.id === targetId);
+    return notesArray.get(targetIndex);
   }
 
   constructor(props) {
@@ -25,20 +27,19 @@ class Notes extends React.Component {
   }
 
   createAndSwitchToNote() {
-    const newNoteTags = (this.props.currentTag !== 'All')
-      ? [this.props.currentTag]
-      : [];
-    const newNote = {
+    const newNoteTag = (this.props.currentTag !== 'All')
+      ? Immutable.List(this.props.currentTag)
+      : Immutable.List();
+    const newNote = new NoteRecord({
       id: Math.random() * 10, // **TODO** change this when we get a better schema for notes
-      title: `New Note ${this.props.notes.length + 1}`,
+      title: `New Note ${this.props.notes.size + 1}`,
       text: '',
-      tags: newNoteTags,
+      tags: newNoteTag,
       dateCreated: Date.now(),
       dateModified: Date.now(),
-    };
+    });
 
     this.props.createNewNote(newNote);
-
     this.updateSelectedNote(newNote.id);
   }
 

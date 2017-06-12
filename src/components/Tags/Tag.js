@@ -25,7 +25,8 @@ class Tag extends React.Component {
 
   tagControlOnClick(event) {
     event.stopPropagation();
-    switch (event.target.textContent) {
+    const selectedButton = event.target.textContent;
+    switch (selectedButton) {
       case 'Save': {
         const newTagName = this.state.name;
         this.props.updateAllTags(this.props.name, newTagName);
@@ -56,6 +57,7 @@ class Tag extends React.Component {
 
   render() {
     const disabledInput = !(this.props.isCurrentTag && this.state.renameIsActive);
+    // TODO: tag editing options under its own component
     return (
       <div
         role="option"

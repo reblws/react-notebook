@@ -22,11 +22,13 @@ function tagCountsToMap(notesArray) {
   return notesArray
     .map(note => note.tags)
     .reduce(flattenTags, Immutable.List())
-    .reduce(reduceToTagCount, Immutable.Map());
+    .reduce(reduceToTagCount, Immutable.Map({ All: notesArray.size }));
 }
 
 const Tags = (props) => {
-  const deleteAllTags = tagToDelete => this.props.updateAllTags(tagToDelete, '');
+  const deleteAllTags = tagToDelete => (
+    props.updateAllTags(tagToDelete, '')
+  );
 
   // Get a flat array of every tag that appears in the note list
   const tagCountsMap = tagCountsToMap(props.notes);
