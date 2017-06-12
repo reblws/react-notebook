@@ -43,7 +43,7 @@ class Notes extends React.Component {
     this.updateSelectedNote(newNote.id);
   }
 
-  currentTagNotes() {
+  get currentTagNotes() {
     if (this.props.currentTag === 'All') return this.props.notes;
     const notesOfCurrentTag = note => note.tags.includes(this.props.currentTag);
     return this.props.notes.filter(notesOfCurrentTag);
@@ -67,9 +67,9 @@ class Notes extends React.Component {
   }
 
   notesFound() {
-    if (!this.state.searchQuery) return this.currentTagNotes();
+    if (!this.state.searchQuery) return this.currentTagNotes;
 
-    const searchResults = this.currentTagNotes().filter((note) => {
+    const searchResults = this.currentTagNotes.filter((note) => {
       // Gotta lowercase the results to get matches
       const searchQuery = this.state.searchQuery.toLowerCase();
       const noteTitle = note.title.toLowerCase();
